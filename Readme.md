@@ -21,7 +21,7 @@
       <View style={styles.container}>
         <Button onPress={() => this._openPopUp()} buttonType='primary'>Show</Button>
         <Popup isVisible={this.state.isVisible}>
-          <Text style={styles.welcome}>It's a Popup!</Text>
+          <Text style={styles.welcome}>Its a Popup!</Text>
           <Text style={styles.instructions}>You can add text</Text>
           <Button textStyle={{textAlign: 'center'}} onPress={() => this._closePopUp()} buttonType='primary'>Close</Button>
         </Popup>
