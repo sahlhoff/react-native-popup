@@ -15,7 +15,7 @@ const HIDE_VALUE     = -600;
 const OVERLAY_VALUE  = 0;
 const DURATION_VALUE = 800;
 
-class Popup extends React.Component {
+class Popup extends Component {
 
   constructor(props){
     super(props);
@@ -60,11 +60,18 @@ class Popup extends React.Component {
   }
 
   _renderPopup(){
+    let counter = 0;
+    const items = React.Children.map(this.props.children, (child) => {
+      return React.cloneElement(child, {
+        className: (child.props.className ? child.props.className : ''),
+        key: counter++
+      });
+    });
 
     return (
       <Animated.View style={this._getAnimatedPopupPosition()}>
         <View style={styles.popupContainer}>
-          {React.Children.map(this.props.children, React.cloneElement)}
+          { items }
         </View>
       </Animated.View>
     );
@@ -146,4 +153,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Popup;
+module.exports = Popup;
