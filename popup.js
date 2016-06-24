@@ -21,16 +21,11 @@ class Popup extends Component {
     super(props);
 
     this.state = {
-      isVisible: true,
-      isTransitioning: true,
+      isVisible: false,
+      isTransitioning: false,
       position: new Animated.Value(HIDE_VALUE),
       opacity: new Animated.Value(OVERLAY_VALUE)
     };
-  }
-  
-  componentDidMount(){
-    this._animatePopupShow();
-    this._animateOverlayShow();
   }
 
   componentWillReceiveProps(nextProps){
