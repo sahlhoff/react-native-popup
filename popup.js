@@ -1,6 +1,9 @@
 'use strict';
  
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes
+} from 'react';
 
 import {
   View,
@@ -11,20 +14,28 @@ import {
   LayoutAnimation
 } from 'react-native';
 
-const HIDE_VALUE     = -600;
-const OVERLAY_VALUE  = 0;
-const DURATION_VALUE = 800;
-
 class Popup extends Component {
 
+  static propTypes = {
+    isVisible: PropTypes.bool,
+    duration: PropTypes.number,
+    hidePosition: PropTypes.number
+  };
+
+  static defaultProps = {
+    isVisible: false,
+    duration: 800,
+    hidePosition: -600
+  };
+  
   constructor(props){
     super(props);
 
     this.state = {
       isVisible: false,
       isTransitioning: false,
-      position: new Animated.Value(HIDE_VALUE),
-      opacity: new Animated.Value(OVERLAY_VALUE)
+      position: new Animated.Value(this.props.hidePosition),
+      opacity: new Animated.Value(0)
     };
   }
 
@@ -77,8 +88,8 @@ class Popup extends Component {
   
   _animatePopupHide(){
     Animated.timing(this.state.position, {
-      duration: DURATION_VALUE,
-      toValue: -600
+      duration: this.props.duration,
+      toValue: this.props.hidePosition
     }).start(() => {
       this.setState({isTransitioning: false});
     });
@@ -86,7 +97,7 @@ class Popup extends Component {
 
   _animatePopupShow(){
     Animated.timing(this.state.position, {
-      duration: DURATION_VALUE,
+      duration: this.props.duration,
       toValue: 0
     }).start(() => {
       this.setState({isTransitioning: false});
@@ -105,14 +116,14 @@ class Popup extends Component {
 
   _animateOverlayShow(){
     Animated.timing(this.state.opacity, {
-      duration: DURATION_VALUE,
+      duration: this.props.duration,
       toValue: .7
     }).start();
   }
 
   _animateOverlayHide(){
     Animated.timing(this.state.opacity, {
-      duration: DURATION_VALUE,
+      duration: this.props.duration,
       toValue: 0
     }).start();    
   }
