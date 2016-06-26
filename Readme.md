@@ -1,6 +1,6 @@
 # React Native Animated Popup
 
-![react native popup](https://raw.githubusercontent.com/sahlhoff/react-native-popup/master/popup.gif)
+<img src="https://raw.githubusercontent.com/sahlhoff/react-native-popup/master/popup.gif" alt="React Native Popup" style="max-width: 200px;"/>
   
 ## Installation
 
