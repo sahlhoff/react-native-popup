@@ -48,4 +48,4 @@
 
 - **`isVisible`** _(bool)_ - Value to show/hide popup.
 - **`duration`** _(number)_ - Duration in milliseconds for animation. Defaults to 800.
-- **`hidePosition`** _(number)_ - This is the absolute position for hiding the popup. Defaults to -600.
+- **`hidePosition`** _(number)_ - This is the absolute position for hiding the popup. Defaults to -600 (set < 0 to render from above; set > screen height to render from below).
