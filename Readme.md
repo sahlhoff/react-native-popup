@@ -20,7 +20,7 @@
     return (
       <View style={styles.container}>
         <Button onPress={() => this._openPopUp()} buttonType='primary'>Show</Button>
-        <Popup isVisible={this.state.isVisible} duration={800} hidePosition={-600}>
+        <Popup isVisible={this.state.isVisible} duration={800} entry={'bottom'} exit={'top'}>
           <Text style={styles.welcome}>Its a Popup!</Text>
           <Text style={styles.instructions}>You can add text</Text>
           <Button textStyle={{textAlign: 'center'}} onPress={() => this._closePopUp()} buttonType='primary'>Close</Button>
@@ -48,4 +48,5 @@
 
 - **`isVisible`** _(bool)_ - Value to show/hide popup.
 - **`duration`** _(number)_ - Duration in milliseconds for animation. Defaults to 800.
-- **`hidePosition`** _(number)_ - This is the absolute position for hiding the popup. Defaults to -600 (set < 0 to render from above; set > screen height to render from below).
+- **`entry`** _(string)_ - Entry position for showing popup. This can be 'top' or 'bottom' defaults to 'top'.
+- **`exit`** _(string)_ - Exit position for hiding popup. This can be 'top' or 'bottom' defaults to 'bottom'.  

@@ -10,33 +10,41 @@ import {
   Text,
   StyleSheet,
   Animated,
-  Easing,
-  LayoutAnimation
+  Dimensions
 } from 'react-native';
+
+var {height, width} = Dimensions.get('window');
 
 class Popup extends Component {
 
   static propTypes = {
     isVisible: PropTypes.bool,
     duration: PropTypes.number,
-    hidePosition: PropTypes.number
+    entry: PropTypes.string,
+    exit: PropTypes.string
   };
 
   static defaultProps = {
     isVisible: false,
     duration: 800,
-    hidePosition: -600
+    entry: 'top',
+    exit: 'bottom'
   };
   
   constructor(props){
     super(props);
-
+    
     this.state = {
-      isVisible: false,
+      isVisible: this.props.isVisible,
       isTransitioning: false,
-      position: new Animated.Value(this.props.hidePosition),
-      opacity: new Animated.Value(0)
+      startPosition: this._getStartPosition(this.props.entry),
+      endPosition: this._getEndPosition(this.props.exit),
+      position: new Animated.Value(this._getStartPosition(this.props.entry)),
+      opacity: new Animated.Value(0),
+      entry: this.props.entry,
+      exit: this.props.exit
     };
+
   }
 
   componentWillReceiveProps(nextProps){
@@ -89,8 +97,9 @@ class Popup extends Component {
   _animatePopupHide(){
     Animated.timing(this.state.position, {
       duration: this.props.duration,
-      toValue: this.props.hidePosition
+      toValue: this.state.endPosition
     }).start(() => {
+      this._setStartPosition();
       this.setState({isTransitioning: false});
     });
   }
@@ -126,6 +135,34 @@ class Popup extends Component {
       duration: this.props.duration,
       toValue: 0
     }).start();    
+  }
+
+  _getStartPosition(entry){
+    switch(entry){
+    case 'top':
+      return height * -1;
+    case 'bottom':
+      return height;
+    default:
+      return height * -1;
+    }
+  }
+
+  _getEndPosition(exit){
+    switch(exit){
+    case 'top':
+      return height * -1;
+    case 'bottom':
+      return height;
+    default:
+      return height * -1;
+    }    
+  }
+
+  _setStartPosition(){
+    this.setState({
+      position: new Animated.Value(this.state.startPosition)
+    });
   }
   
 }
