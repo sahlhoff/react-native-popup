@@ -23,6 +23,8 @@
         <Popup isVisible={this.state.isVisible} duration={800} entry={'bottom'} exit={'top'}>
           <Text style={styles.welcome}>Its a Popup!</Text>
           <Text style={styles.instructions}>You can add text</Text>
+          <Image style={styles.image} source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}} />
+          <Text style={styles.instructions}>And images too!</Text>
           <Button textStyle={{textAlign: 'center'}} onPress={() => this._closePopUp()} buttonType='primary'>Close</Button>
         </Popup>
       </View>
