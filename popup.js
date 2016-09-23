@@ -33,7 +33,7 @@ class Popup extends Component {
   
   constructor(props){
     super(props);
-    
+
     this.state = {
       isVisible: this.props.isVisible,
       isTransitioning: false,
@@ -48,21 +48,22 @@ class Popup extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.setState({isTransitioning: true});
-    if(!nextProps.isVisible){
-      this.setState({isVisible: false});
-      this._animatePopupHide();
-      this._animateOverlayHide();
-    } else {
+    if(nextProps.isVisible && !this.state.isVisible){
+      this.setState({isTransitioning: true});
       this.setState({isVisible: true});
       this._animatePopupShow();
       this._animateOverlayShow();
+    } else if (!nextProps.isVisible && this.state.isVisible) {
+      this.setState({isTransitioning: true});
+      this.setState({isVisible: false});
+      this._animatePopupHide();
+      this._animateOverlayHide();
     }
   }
   
   render(){
     if(!this.state.isVisible && !this.state.isTransitioning){
-      return <View />;
+      return null;
     } else {
       return (
         <View style={styles.parentContainer}>
